@@ -1,9 +1,9 @@
-const progress = document.getElementById('progress');
-const prev = document.getElementById('prev');
-const next = document.getElementById('next');
-const circles = document.querySelectorAll('.circle');
+const progress = document.getElementById('progress')
+const prev = document.getElementById('prev')
+const next = document.getElementById('next')
+const circles = document.querySelectorAll('.circle')
 
-let currentActive = 1;
+let currentActive = 1
 
 next.addEventListener('click', () => {
     currentActive++
@@ -13,7 +13,7 @@ next.addEventListener('click', () => {
     }
 
     update()
-});
+})
 
 prev.addEventListener('click', () => {
     currentActive--
@@ -23,7 +23,7 @@ prev.addEventListener('click', () => {
     }
 
     update()
-});
+})
 
 function update() {
     circles.forEach((circle, idx) => {
@@ -33,17 +33,17 @@ function update() {
             circle.classList.remove('active')
         }
     })
+        const actives = document.querySelectorAll('.active')
 
-    const actives = document.querySelectorAll('.active')
+        progress.style.width = (actives.length - 1) / (circles.length - 1) * 100 + '%'
 
-    progress.style.width = (actives.length - 1) / (circles.length - 1) * 100 + '%'
+        if(actives.length === 1) {
+            prev.disabled = true
+        } else if(actives.length === circles.length) {
+            next.disabled = true
+        } else {
+            prev.disabled = false
+            next.disabled = false
+        }
+    };
 
-    if(currentActive === 1) {
-        prev.disabled = true
-    } else if(currentActive === circles.length) {
-        next.disabled = true
-    } else {
-        prev.disabled = false
-        next.disabled = false
-    }
-};
